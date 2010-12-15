@@ -1,4 +1,46 @@
-= BodyClass extension
+BodyClass extension
+-------------------
+
+An extension for Radiant CMS that allows you to set a body class attribute for
+each page.
 
 Created by: Douglas Robertson -- www.edgeoftheearth.com
 Version:    1.0
+
+
+Usage
+-----
+
+Set the body class attribute of each page. Access the contents of the attribute
+with the body_class tag as such:
+
+<r:body_class />
+
+Typically, this would be done within your layouts. For example:
+
+<html>
+<head>
+  <title><r:title /></title>
+</head>
+<body class="<r:body_class />">
+  <r:content />
+</body>
+</html>
+
+
+Installation
+------------
+
+git clone git://github.com/douglasr/radiant-body-class-extension.git vendor/extensions/body_class
+rake RAILS_ENV=production radiant:extensions:body_class:migrate
+rake RAILS_ENV=production radiant:extensions:body_class:update
+
+
+Acknowledgements
+----------------
+
+Thanks to Trevor Robertson for showing me the usefulness of body classes and
+for pushing me to build something that makes it easier to use this technique
+(content parts are so clumsy). Thanks also to all the Radiant extension
+authors whose code I read through in order to learn how to do something as
+simple as this.

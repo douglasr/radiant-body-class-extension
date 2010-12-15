@@ -12,7 +12,8 @@ BodyClassMethods = Proc.new do
 
   def body_class_name=(name)
     bc = body_class
-    bc.page_id ||= self.id
+    self.save if (self.new_record?)   # we need an ID
+    bc.page_id = self.id  # set this specifically each time in case of copy/move/etc
     bc.name = name
     bc.save
   end
@@ -24,7 +25,8 @@ BodyClassMethods = Proc.new do
 
   def body_class_inherit=(inherit)
     bc = body_class
-    bc.page_id ||= self.id
+    self.save if (self.new_record?)   # we need an ID
+    bc.page_id = self.id  # set this specifically each time in case of copy/move/etc
     bc.inherit = inherit
     bc.save
   end

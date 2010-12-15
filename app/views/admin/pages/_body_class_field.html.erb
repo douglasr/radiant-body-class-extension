@@ -1,0 +1,11 @@
+<tr>
+  <th class='label'>
+    <label for='page_body_class_name'>Body Class</label>
+  </th>
+  <td class='field'>
+    <%= f.text_field :body_class_name, :value => @page.body_class_name, :class => 'textbox', :maxlength => 250 %>
+    <% unless model.errors.on_base.nil? %>
+    <span class="error"><%= model.errors.on_base %></span>
+    <% end %>
+  </td>
+</tr>

@@ -1,7 +1,7 @@
 require_dependency 'application_controller'
 
 class BodyClassExtension < Radiant::Extension
-  version "1.0"
+  version "1.1"
   description "Radiant extension to add an attribute to the Page model for body class."
   url "http://www.edgeoftheearth.com/radiant/body-class-extension"
 

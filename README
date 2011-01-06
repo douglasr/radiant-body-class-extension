@@ -5,7 +5,7 @@ An extension for Radiant CMS that allows you to set a body class attribute for
 each page.
 
 Created by: Douglas Robertson -- www.edgeoftheearth.com
-Version:    1.0
+Version:    1.1
 
 
 Usage
@@ -15,6 +15,7 @@ Set the body class attribute of each page. Access the contents of the attribute
 with the body_class tag as such:
 
 <r:body_class />
+
 
 Typically, this would be done within your layouts. For example:
 
@@ -26,6 +27,13 @@ Typically, this would be done within your layouts. For example:
   <r:content />
 </body>
 </html>
+
+
+You can also inherit the body class from the parent (or ALL parents) using the
+inherit attribute.
+
+<r:body_class inherit="true" />
+<r:body_class inherit="all" />
 
 
 Installation
@@ -48,3 +56,6 @@ for pushing me to build something that makes it easier to use this technique
 (content parts are so clumsy). Thanks also to all the Radiant extension
 authors whose code I read through in order to learn how to do something as
 simple as this.
+
+Thanks to Aimerick Desdoit (GitHub: Aimerick) who added support for inheriting
+from parent pages.

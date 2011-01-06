@@ -39,7 +39,11 @@ module BodyClassTags
       parent = tag.locals.page.parent
       while parent
         body_class += " #{parent.body_class.name}" unless parent.body_class.name.blank?
-        parent = parent.parent if tag.attr['inherit'] == 'all'
+        if tag.attr['inherit'] == 'all'
+          parent = parent.parent 
+        else
+          parent = nil
+        end
       end
     end
     

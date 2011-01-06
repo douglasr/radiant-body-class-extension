@@ -7,6 +7,7 @@ class BodyClassExtension < Radiant::Extension
 
   def activate
     Page.send :include, BodyClassTags
+    Page.send :has_one, :body_class
     BodyClass
     Page.module_eval &BodyClassMethods
     admin.page.edit.add :extended_metadata, 'body_class_field'

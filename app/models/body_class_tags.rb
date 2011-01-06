@@ -28,14 +28,14 @@ module BodyClassTags
   end
   
   def get_body_class(tag)
-    body_class = tag.locals.page.body_class.name
-    if body_class.blank?
-      parent = tag.locals.page.parent
-      while parent && body_class.blank?
-        body_class = parent.body_class.name
-        parent = parent.parent
-      end
+    body_class = tag.locals.page.body_class.name || ''
+    
+    parent = tag.locals.page.parent
+    while parent
+      body_class += ' '+parent.body_class.name unless parent.body_class.name.blank?
+      parent = parent.parent
     end
+    
     body_class
   end
 

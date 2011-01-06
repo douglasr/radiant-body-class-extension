@@ -8,16 +8,18 @@ module BodyClassTags
   tag "if_body_class" do |tag|
     body_class = get_body_class(tag)
     if tag.attr['equal']
-      return tag.expand if tag.attr['equal'] == body_class
+      tag.expand if tag.attr['equal'] == body_class
+    else
+      tag.expand unless body_class.blank?
     end
-    tag.expand unless body_class.blank?
   end
   tag "unless_body_class" do |tag|
     body_class = get_body_class(tag)
     if tag.attr['equal']
-      return tag.expand unless tag.attr['equal'] == body_class
+      tag.expand unless tag.attr['equal'] == body_class
+    else
+      tag.expand if body_class.blank?
     end
-    tag.expand if body_class.blank?
   end
   
   desc "Render the body class text for the current page."

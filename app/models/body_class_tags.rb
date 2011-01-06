@@ -6,10 +6,18 @@ module BodyClassTags
     The <pre><r:unless_body_class /></pre> tag is also available to be used.
   }
   tag "if_body_class" do |tag|
-    tag.expand unless get_body_class(tag).blank?
+    body_class = get_body_class(tag)
+    if tag.attr['equal']
+      return tag.expand if tag.attr['equal'] == body_class
+    end
+    tag.expand unless body_class.blank?
   end
   tag "unless_body_class" do |tag|
-    tag.expand if get_body_class(tag).blank?
+    body_class = get_body_class(tag)
+    if tag.attr['equal']
+      return tag.expand unless tag.attr['equal'] == body_class
+    end
+    tag.expand if body_class.blank?
   end
   
   desc "Render the body class text for the current page."

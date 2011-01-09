@@ -29,8 +29,8 @@ module BodyClassTags
     body_class attribute, it will retrieve the value from any parents if the inherit attribute is set
     to 'true' or 'all' as such: <pre><r:body_class [inherit="true|false|all"]/></pre>
     
-    true : get first no-blank body_class from parents 
-    all (default) : get all no-blank from parents
+    true : get first non-blank body_class from parents 
+    all  : get non-blank body_class from ALL parents (default)
   }
   tag "body_class" do |tag|
     get_body_class(tag)

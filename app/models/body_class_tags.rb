@@ -1,4 +1,5 @@
 module BodyClassTags
+  
   include Radiant::Taggable
   
   desc %{
@@ -27,6 +28,9 @@ module BodyClassTags
     Render the body class text for the current page. If the current page doesn't have anything in its
     body_class attribute, it will retrieve the value from any parents if the inherit attribute is set
     to 'true' or 'all' as such: <pre><r:body_class [inherit="true|false|all"]/></pre>
+    
+    true : get first no-blank body_class from parents 
+    all (default) : get all no-blank from parents
   }
   tag "body_class" do |tag|
     get_body_class(tag)
@@ -35,19 +39,21 @@ module BodyClassTags
   def get_body_class(tag)
     body_class = tag.locals.page.body_class.name || ''
 
-    if (tag.attr['inherit'] == 'true' || tag.attr['inherit'] == 'all')
+    inherit = tag.attr['inherit'] ? tag.attr['inherit'] : 'all'
+    
+    if (inherit == 'true' && body_class.blank?) || inherit == 'all'
       parent = tag.locals.page.parent
       while parent
         body_class += " #{parent.body_class.name}" unless parent.body_class.name.blank?
-        if tag.attr['inherit'] == 'all'
-          parent = parent.parent 
+        if inherit == 'all' || body_class.blank?
+          parent = parent.parent
         else
           parent = nil
         end
       end
     end
     
-    body_class
+    body_class.strip
   end
 
 end

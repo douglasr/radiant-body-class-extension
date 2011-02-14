@@ -8,7 +8,9 @@ module BodyClassTags
   }
   tag "if_body_class" do |tag|
     body_class = get_body_class(tag)
-    if tag.attr['equal']
+    if tag.attr['contains']
+      tag.expand if body_class.include?(tag.attr['contains'])
+    elsif tag.attr['equal']
       tag.expand if tag.attr['equal'] == body_class
     else
       tag.expand unless body_class.blank?
@@ -17,7 +19,9 @@ module BodyClassTags
 
   tag "unless_body_class" do |tag|
     body_class = get_body_class(tag)
-    if tag.attr['equal']
+    if tag.attr['contains']
+      tag.expand unless body_class.include?(tag.attr['contains'])
+    elsif tag.attr['equal']
       tag.expand unless tag.attr['equal'] == body_class
     else
       tag.expand if body_class.blank?

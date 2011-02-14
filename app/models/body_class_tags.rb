@@ -3,13 +3,18 @@ module BodyClassTags
   include Radiant::Taggable
   
   desc %{
-    Expands if a <pre><r:body_class [inherit="true|false|all"]/></pre> call would return a body class string.
+    Expands if a <pre><r:body_class [inherit="true|false|all"] /></pre> call would return a body class
+    string. You can also specify attributes for 'contains', 'has' or 'equal' which furthers the
+    conditional and only expands if the body class contains (partial match), has (matches one class) or
+    is equal to (exact match) the specified string.
     The <pre><r:unless_body_class /></pre> tag is also available to be used.
   }
   tag "if_body_class" do |tag|
     body_class = get_body_class(tag)
     if tag.attr['contains']
       tag.expand if body_class.include?(tag.attr['contains'])
+    elsif tag.attr['has']
+      tag.expand if body_class.split(' ').include?(tag.attr['has'])
     elsif tag.attr['equal']
       tag.expand if tag.attr['equal'] == body_class
     else
@@ -21,6 +26,8 @@ module BodyClassTags
     body_class = get_body_class(tag)
     if tag.attr['contains']
       tag.expand unless body_class.include?(tag.attr['contains'])
+    elsif tag.attr['has']
+      tag.expand unless body_class.split(' ').include?(tag.attr['has'])
     elsif tag.attr['equal']
       tag.expand unless tag.attr['equal'] == body_class
     else
